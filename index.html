@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Moonlander Game</title>
+    <style>
+        body { margin: 0; overflow: hidden; }
+        canvas { display: block; }
+        #resetCamera {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: #fff;
+            font-family: Arial, sans-serif;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        #resetCamera:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <button id="resetCamera">Reset View</button>
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.154.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.154.0/examples/jsm/"
+        }
+    }
+    </script>
+    <script type="module">
+        // First load simplex noise
+        const simplexModule = await import('https://unpkg.com/simplex-noise@4.0.1/dist/esm/simplex-noise.js');
+        
+        // Make it globally available
+        window.SimplexNoise = simplexModule;
+        
+        // Then load the game
+        try {
+            await import('./game.js');
+        } catch (error) {
+            console.error('Failed to load game:', error);
+            console.error('Error details:', error.stack);
+        }
+    </script>
+</body>
+</html>
